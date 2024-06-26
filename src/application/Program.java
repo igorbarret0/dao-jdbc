@@ -38,5 +38,10 @@ public class Program {
 
         sellerDao.insert(newSeller);
 
+        System.out.println("=== TEST 5: seller update");
+        newSeller.setEmail("igor0000@email.com");
+        newSeller.setId(15);
+        sellerDao.update(newSeller);
+
     }
 }
