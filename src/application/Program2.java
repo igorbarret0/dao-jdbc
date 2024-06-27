@@ -27,5 +27,9 @@ public class Program2 {
         System.out.println("=== deleteById DEPARTMENT === ");
         depDao.deleteById(6);
 
+        System.out.println("=== findById DEPARTMENT === ");
+        System.out.println(depDao.findById(1));
+
+
     }
 }
