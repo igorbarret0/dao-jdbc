@@ -15,7 +15,7 @@ public class Program2 {
 
         DepartmentDao depDao = DaoFactory.createDepartmentDao();
 
-        System.out.println("=== insert DEPARTMENT === ");
+        /*System.out.println("=== insert DEPARTMENT === ");
         Department newDepartment = new Department(null, "Groceries");
         depDao.insert(newDepartment);
 
@@ -28,8 +28,10 @@ public class Program2 {
         depDao.deleteById(6);
 
         System.out.println("=== findById DEPARTMENT === ");
-        System.out.println(depDao.findById(1));
+        System.out.println(depDao.findById(1)); */
 
+        System.out.println("=== findAll DEPARTMENT === ");
+        System.out.println(depDao.findAll());
 
     }
 }

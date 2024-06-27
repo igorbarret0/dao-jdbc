@@ -5,8 +5,12 @@ import db.DbException;
 import model.dao.DepartmentDao;
 import model.entities.Department;
 
+import java.beans.DefaultPersistenceDelegate;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class DepartmentDaoJDBC implements DepartmentDao {
 
@@ -140,7 +144,43 @@ public class DepartmentDaoJDBC implements DepartmentDao {
 
     @Override
     public List<Department> findAll() {
-        return List.of();
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+
+            ps = conn.prepareStatement(
+                    "SELECT * FROM department"
+            );
+
+            rs = ps.executeQuery();
+
+            List<Department> listDepartments = new ArrayList<>();
+            Map<Integer, Department> map = new HashMap<>();
+
+            while (rs.next()) {
+
+                Department dep = map.get(rs.getInt("Id"));
+
+                if (dep == null) {
+                    dep = instantiateDepartment(rs);
+                    map.put(rs.getInt("Id"), dep);
+                }
+
+                listDepartments.add(dep);
+            }
+
+            return listDepartments;
+
+
+        } catch (SQLException exception) {
+            throw new DbException(exception.getMessage());
+        } finally {
+            DB.closeResultSet(rs);
+            DB.closePreparedStatement(ps);
+        }
+
     }
 
     private Department instantiateDepartment(ResultSet rs) throws SQLException {
