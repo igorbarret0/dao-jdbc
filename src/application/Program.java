@@ -43,5 +43,9 @@ public class Program {
         newSeller.setId(15);
         sellerDao.update(newSeller);
 
+        System.out.println("=== TEST 6: seller delete");
+        sellerDao.deleteById(10);
+
+
     }
 }
